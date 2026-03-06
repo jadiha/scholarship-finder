@@ -4,15 +4,9 @@ import yaml
 from dotenv import load_dotenv
 from playwright.sync_api import sync_playwright
 
-from scrapers.uwaterloo import UWaterlooScraper
-from scrapers.uwaterloo_engineering import UWaterlooEngineeringScraper
-from scrapers.onwie import ONWiEScraper
+from scrapers.curated import CuratedScraper
 from scrapers.engineers_canada import EngineersCanadaScraper
-from scrapers.womeninengtech import WomenInEngTechScraper
-from scrapers.scholars_canada import ScholarshipsCanadaScraper
-from scrapers.student_awards import StudentAwardsScraper
-from scrapers.corporate import CorporateScraper
-from scrapers.bold import BoldScraper
+from scrapers.onwie import ONWiEScraper
 from filters import filter_and_score
 from notifier import post_to_discord, generate_dashboard
 
@@ -42,18 +36,6 @@ def main():
     config = load_config()
     seen = load_seen()
 
-    scrapers = [
-        UWaterlooScraper(config),
-        UWaterlooEngineeringScraper(config),
-        ONWiEScraper(config),
-        EngineersCanadaScraper(config),
-        WomenInEngTechScraper(config),
-        ScholarshipsCanadaScraper(config),
-        StudentAwardsScraper(config),
-        CorporateScraper(config),
-        BoldScraper(config),
-    ]
-
     all_raw = []
 
     with sync_playwright() as p:
@@ -66,14 +48,15 @@ def main():
             )
         )
 
+        scrapers = [
+            CuratedScraper(config),       # Verified list — always works
+            EngineersCanadaScraper(config),  # Found 94 results — fix selectors
+            ONWiEScraper(config),          # Found 30 results
+        ]
+
         for scraper in scrapers:
-            name = scraper.__class__.__name__
-            # CorporateScraper doesn't need a browser page
-            if isinstance(scraper, CorporateScraper):
-                results = scraper.scrape(page=None)
-            else:
-                results = scraper.scrape(page)
-            print(f"  [{name}] found {len(results)}")
+            results = scraper.scrape(page)
+            print(f"  [{scraper.__class__.__name__}] found {len(results)}")
             all_raw.extend(results)
 
         browser.close()
