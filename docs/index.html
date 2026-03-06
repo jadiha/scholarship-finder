@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scholarship Finder</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f5; color: #222; }
+  header { background: #1a1a2e; color: white; padding: 2rem; }
+  header h1 { font-size: 1.6rem; }
+  header p { opacity: 0.7; font-size: 0.9rem; margin-top: 0.3rem; }
+  .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  th { background: #1a1a2e; color: white; padding: 0.8rem 1rem; text-align: left; font-size: 0.85rem; }
+  td { padding: 0.75rem 1rem; border-bottom: 1px solid #eee; font-size: 0.9rem; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+  a { color: #2980b9; text-decoration: none; font-weight: 500; }
+  a:hover { text-decoration: underline; }
+  .score { background: #1a1a2e; color: white; border-radius: 4px; padding: 2px 8px; font-size: 0.8rem; font-weight: 700; }
+  .tag { background: #eef; color: #336; border-radius: 3px; padding: 1px 6px; font-size: 0.75rem; margin-right: 3px; display: inline-block; }
+  .updated { color: #888; font-size: 0.8rem; margin-top: 1rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Scholarship Finder</h1>
+  <p>Personalized for: 3rd year Systems Design Engineering · UWaterloo · Female · Canadian</p>
+</header>
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Scholarship</th>
+        <th>Amount</th>
+        <th>Deadline</th>
+        <th>Score</th>
+        <th>Source</th>
+        <th>Effort</th>
+        <th>Tags</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+            <td><a href="https://uwaterloo.ca/student-awards-financial-aid/awards/database" target="_blank">Example scholarships & awards for current students</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check portal</td>
+            <td><span class="score">55</span></td>
+            <td>UWaterloo Engineering</td>
+            <td>Easy apply</td>
+            <td><span class="tag">engineering</span> <span class="tag">uwaterloo</span> <span class="tag">undergraduate</span> <span class="tag">female</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://careers.microsoft.com/students/us/en/usscholarshipprogram" target="_blank">Microsoft Scholarship Program</a></td>
+            <td>$5,000 USD</td>
+            <td style="color:#e74c3c;font-weight:600">November 17, 2025 (closed)</td>
+            <td><span class="score">51</span></td>
+            <td>Corporate</td>
+            <td>High effort</td>
+            <td><span class="tag">female</span> <span class="tag">engineering</span> <span class="tag">stem</span> <span class="tag">tech</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.shopify.com/careers/scholarships" target="_blank">Shopify Women in Tech Scholarship</a></td>
+            <td>$5,000</td>
+            <td style="color:#95a5a6;font-weight:600">Check site annually</td>
+            <td><span class="score">47</span></td>
+            <td>Corporate</td>
+            <td>Some effort</td>
+            <td><span class="tag">female</span> <span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">tech</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.scotiabank.com/ca/en/personal/chequing-savings/student-banking/scholarships.html" target="_blank">Scotiabank Women Initiative Scholarship</a></td>
+            <td>$5,000</td>
+            <td style="color:#95a5a6;font-weight:600">Check site annually</td>
+            <td><span class="score">47</span></td>
+            <td>Corporate</td>
+            <td>Some effort</td>
+            <td><span class="tag">female</span> <span class="tag">canadian</span> <span class="tag">stem</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.fortisinc.com/community/scholarships" target="_blank">Fortis Inc. Women in Engineering Award</a></td>
+            <td>$5,000</td>
+            <td style="color:#95a5a6;font-weight:600">Check site annually</td>
+            <td><span class="score">47</span></td>
+            <td>Corporate</td>
+            <td>Some effort</td>
+            <td><span class="tag">female</span> <span class="tag">engineering</span> <span class="tag">canadian</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship-emea" target="_blank">Google Generation Scholarship</a></td>
+            <td>$10,000 USD</td>
+            <td style="color:#95a5a6;font-weight:600">Check site annually</td>
+            <td><span class="score">45</span></td>
+            <td>Corporate</td>
+            <td>High effort</td>
+            <td><span class="tag">female</span> <span class="tag">engineering</span> <span class="tag">stem</span> <span class="tag">canadian</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.rbcroyalbank.com/dms/business/student/rbc-future-launch/index.html" target="_blank">RBC Future Launch STEM Scholarship</a></td>
+            <td>$2,500</td>
+            <td style="color:#95a5a6;font-weight:600">Check site annually</td>
+            <td><span class="score">40</span></td>
+            <td>Corporate</td>
+            <td>Easy apply</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">stem</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.td.com/ca/en/personal-banking/solutions/student-centre/td-scholarship/" target="_blank">TD Scholarships for Community Leadership</a></td>
+            <td>$70,000 (over 4 years)</td>
+            <td style="color:#95a5a6;font-weight:600">Check site annually</td>
+            <td><span class="score">35</span></td>
+            <td>Corporate</td>
+            <td>High effort</td>
+            <td><span class="tag">canadian</span> <span class="tag">leadership</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">National</a></td>
+            <td>$2000,</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">32</span></td>
+            <td>ONWiE</td>
+            <td>Some effort</td>
+            <td><span class="tag">female</span> <span class="tag">engineering</span> <span class="tag">ontario</span> <span class="tag">canadian</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.debeersgroup.com/building-forever/partnerships/scholarships" target="_blank">De Beers Group Scholarship for Women in STEM</a></td>
+            <td>Varies</td>
+            <td style="color:#95a5a6;font-weight:600">Check site annually</td>
+            <td><span class="score">32</span></td>
+            <td>Corporate</td>
+            <td>Some effort</td>
+            <td><span class="tag">female</span> <span class="tag">stem</span> <span class="tag">canadian</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/contact" target="_blank">Contact</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/log-in" target="_blank">Member Login</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/fr/prix-et-distinctions/bourses" target="_blank">Français</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/about-engineers-canada" target="_blank">About Engineers Canada</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/about-accreditation" target="_blank">About accreditation</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/overview-of-licensing-process" target="_blank">Overview of the Licensing Process</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/regulatory-excellence/engineering-regulators" target="_blank">Engineering regulators</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/public-policy/government-relations" target="_blank">Government Relations</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/diversity/about-diversity-in-engineering" target="_blank">About Diversity in Engineering</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/final-year-student-exit-report" target="_blank">Final Year Student Exit Report</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/services/insurance-financial-and-other-benefits" target="_blank">Insurance, Financial and Other Benefits</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/news-and-events/news" target="_blank">Engineering Matters</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/engineers-canada-awards" target="_blank">Awards</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">About</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/about-engineers-canada" target="_blank">About Engineers Canada</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/annual-reports" target="_blank">Annual Reports</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/governance" target="_blank">Governance</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/committees" target="_blank">Engineers Canada's Committees</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/careers-at-engineers-canada" target="_blank">Careers at Engineers Canada</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/intellectual-property" target="_blank">Intellectual Property</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/privacy-policy" target="_blank">Privacy Policy</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/accessibility" target="_blank">Accessibility</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Accreditation</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/about-accreditation" target="_blank">About accreditation</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/accredited-programs/institution" target="_blank">Accredited engineering programs in Canada</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/accreditation-resources" target="_blank">Accreditation resources</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/accreditation-board" target="_blank">Accreditation Board</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/realizing-futures-of-engineering-accreditation" target="_blank">Realizing Futures of Engineering Accreditation</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/accountability-in-accreditation" target="_blank">Accountability in Accreditation</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/about-accreditation/reports-and-consultations" target="_blank">Reports and consultations</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/the-washington-accord" target="_blank">The Washington Accord</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/accreditation/substantially-equivalent-programs" target="_blank">Substantially Equivalent Programs</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Become an Engineer</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/overview-of-licensing-process" target="_blank">Overview of the Licensing Process</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/mobility-across-canada" target="_blank">Mobility across Canada</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/for-internationally-trained-engineers" target="_blank">Information for Internationally Trained Engineers</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/agreements-on-international-mobility" target="_blank">Agreements on International Mobility</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/reasons-why-people-become-engineers" target="_blank">Reasons why people become engineers</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/become-an-engineer-in-training" target="_blank">Become an engineer-in-training</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/become-an-engineer/use-of-professional-title-and-designations" target="_blank">Use of professional title and designations</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Regulatory Excellence</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/regulatory-excellence/engineering-regulators" target="_blank">Engineering regulators</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/regulatory-excellence/examination-syllabi" target="_blank">Examination Syllabi</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/regulatory-excellence/national-engineering-guidelines" target="_blank">National Engineering Guidelines and Engineers Canada papers</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/regulatory-excellence/collaboration-and-harmonization-agreement" target="_blank">Collaboration and Harmonization agreement</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Public Policy</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/public-policy/government-relations" target="_blank">Government Relations</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/public-policy/climate-change-and-engineering" target="_blank">Climate Change and Engineering</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/public-policy/national-position-statements" target="_blank">National Position Statements</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/public-policy/government-submissions" target="_blank">Government Submissions</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/public-policy/issue-statements" target="_blank">Issue Statements</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Equity, Diversity, and Inclusion</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/diversity/about-diversity-in-engineering" target="_blank">About Diversity in Engineering</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/diversity/youth-engagement-in-stem" target="_blank">Youth engagement in STEM</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/diversity/reconciliation-in-engineering" target="_blank">Reconciliation in engineering</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/diversity/women-in-engineering" target="_blank">Women in Engineering</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/diversity/newcomers-to-canada" target="_blank">Newcomers to Canada</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/diversity/webinar-equity-diversity-and-inclusion-for-engineers-and-geoscientists" target="_blank">Webinar: Equity, diversity, and inclusion for engineers and geoscientists</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/managing-transitions" target="_blank">Managing Transitions</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Reports</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/final-year-student-exit-report" target="_blank">Final Year Student Exit Report</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/enrolment-and-degrees-awarded-report" target="_blank">Enrolment and Degrees Awarded Report</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/national-membership-report" target="_blank">National Membership Report</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/indigenous-engineering-in-canada" target="_blank">Indigenous engineering in Canada</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/research/indigenous-engineering-in-canada" target="_blank">Indigenous Peoples’ Access to Post-Secondary Engineering Programs</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/reports/public-perceptions" target="_blank">Public Perceptions of Engineering and Engineers</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Services for Engineers</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/services/insurance-financial-and-other-benefits" target="_blank">Insurance, Financial and Other Benefits</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/services/registering-canadian-corporation" target="_blank">Registering a Canadian Corporation</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/services/infrastructure-resilience-professional" target="_blank">Infrastructure Resilience Professional (IRP) designation</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/services/mobility-register" target="_blank">The Engineers Canada Mobility Register</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">News and Events</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/news-and-events/news" target="_blank">Engineering Matters</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/news-and-events/events" target="_blank">Calendar of Events</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/nem2026" target="_blank">National Engineering Month 2026</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://conference.ccwestt.org/en/" target="_blank">Beyond Boundaries: Collaborating for Collective Action</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/ironring100" target="_blank">Iron Ring 100</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="#" target="_blank">Awards and Honours</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/engineers-canada-awards" target="_blank">Awards</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/scholarships" target="_blank">Scholarships</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/fellowships" target="_blank">Fellowships</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/contact" target="_blank">Contact</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/fr/prix-et-distinctions/bourses" target="_blank">Français</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/user/login?destination=/members" target="_blank">Member Login</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/engineers-canada-awards" target="_blank">Awards</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/scholarships" target="_blank">Scholarships</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/scholarships/graduate" target="_blank">Graduate student scholarships</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/scholarships/undergraduate" target="_blank">Undergraduate student scholarships</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/scholarships/past-recipients" target="_blank">Past scholarships recipients</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/awards-and-honours/fellowships" target="_blank">Fellowships</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/about/intellectual-property" target="_blank">Intellectual property</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/website-privacy-policy" target="_blank">Website Privacy Policy</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/website-terms-of-use" target="_blank">Website Terms of Use</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://engineerscanada.ca/site-map" target="_blank">Sitemap</a></td>
+            <td>See details</td>
+            <td style="color:#95a5a6;font-weight:600">Check site</td>
+            <td><span class="score">22</span></td>
+            <td>Engineers Canada</td>
+            <td>Some effort</td>
+            <td><span class="tag">engineering</span> <span class="tag">canadian</span> <span class="tag">undergraduate</span></td>
+        </tr>
+    </tbody>
+  </table>
+  <p class="updated">Last updated: March 06, 2026</p>
+</div>
+</body>
+</html>
