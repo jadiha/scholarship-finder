@@ -19,7 +19,14 @@ jobs:
       - name: Write private config
         env:
           CONFIG_YAML: ${{ secrets.CONFIG_YAML }}
-        run: echo "$CONFIG_YAML" > config.yaml
+        run: |
+          python3 -c "
+import os, textwrap
+content = os.environ['CONFIG_YAML']
+content = textwrap.dedent(content).strip()
+open('config.yaml', 'w').write(content)
+print('Config written. Lines:', len(content.splitlines()))
+"
 
       - name: Set up Python
         uses: actions/setup-python@v5
