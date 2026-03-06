@@ -6,7 +6,7 @@ on:
   workflow_dispatch:         # lets you trigger it manually from GitHub UI
 
 permissions:
-  contents: write            # needed to commit seen.json + dashboard back to repo
+  contents: write
 
 jobs:
   scrape:
@@ -16,17 +16,35 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Write private config
+      - name: Write config
         env:
-          CONFIG_YAML: ${{ secrets.CONFIG_YAML }}
+          GPA: ${{ secrets.GPA }}
+          FINANCIAL_NEED: ${{ secrets.FINANCIAL_NEED }}
+          FIRST_GEN: ${{ secrets.FIRST_GEN }}
+          VISIBLE_MINORITY: ${{ secrets.VISIBLE_MINORITY }}
         run: |
-          python3 -c "
-import os, textwrap
-content = os.environ['CONFIG_YAML']
-content = textwrap.dedent(content).strip()
-open('config.yaml', 'w').write(content)
-print('Config written. Lines:', len(content.splitlines()))
-"
+          cat > config.yaml << EOF
+          profile:
+            year: 3
+            program: systems_design_engineering
+            school: university_of_waterloo
+            gender: female
+            citizenship: canadian
+            gpa: ${GPA:-3.5}
+            financial_need: ${FINANCIAL_NEED:-false}
+            first_gen: ${FIRST_GEN:-false}
+            visible_minority: ${VISIBLE_MINORITY:-false}
+            leadership: true
+            stem_volunteering: true
+            target_industry: software
+          filters:
+            min_amount: 500
+            include_no_amount: true
+          notifications:
+            discord: true
+            github_pages: true
+          EOF
+          python3 -c "import yaml; yaml.safe_load(open('config.yaml')); print('Config OK')"
 
       - name: Set up Python
         uses: actions/setup-python@v5
