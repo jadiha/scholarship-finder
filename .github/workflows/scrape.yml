@@ -21,6 +21,11 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
       - name: Write config
         env:
           GPA: ${{ secrets.GPA }}
@@ -29,43 +34,32 @@ jobs:
           VISIBLE_MINORITY: ${{ secrets.VISIBLE_MINORITY }}
         run: |
           python3 - << 'PYEOF'
-          import os
-          gpa = os.environ.get("GPA", "3.5")
-          financial_need = os.environ.get("FINANCIAL_NEED", "false")
-          first_gen = os.environ.get("FIRST_GEN", "false")
-          visible_minority = os.environ.get("VISIBLE_MINORITY", "false")
-          config = f"""profile:
-            year: 3
-            program: systems_design_engineering
-            school: university_of_waterloo
-            gender: female
-            citizenship: canadian
-            gpa: {gpa}
-            financial_need: {financial_need}
-            first_gen: {first_gen}
-            visible_minority: {visible_minority}
-            leadership: true
-            stem_volunteering: true
-            target_industry: software
-          filters:
-            min_amount: 500
-            include_no_amount: true
-          notifications:
-            discord: true
-            github_pages: true
-          """
-          import textwrap
-          config = textwrap.dedent(config).strip()
+          import os, textwrap, yaml
+          config = textwrap.dedent(f"""
+            profile:
+              year: 3
+              program: systems_design_engineering
+              school: university_of_waterloo
+              gender: female
+              citizenship: canadian
+              gpa: {os.environ.get("GPA", "3.5")}
+              financial_need: {os.environ.get("FINANCIAL_NEED", "false")}
+              first_gen: {os.environ.get("FIRST_GEN", "false")}
+              visible_minority: {os.environ.get("VISIBLE_MINORITY", "false")}
+              leadership: true
+              stem_volunteering: true
+              target_industry: software
+            filters:
+              min_amount: 500
+              include_no_amount: true
+            notifications:
+              discord: true
+              github_pages: true
+          """).strip()
           open("config.yaml", "w").write(config)
-          import yaml
           yaml.safe_load(open("config.yaml"))
           print("Config OK")
           PYEOF
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          playwright install --with-deps chromium
 
       - name: Run scraper
         env:
