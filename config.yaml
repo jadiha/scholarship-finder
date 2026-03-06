@@ -1,0 +1,21 @@
+profile:
+  year: 3
+  program: systems_design_engineering
+  school: university_of_waterloo
+  gender: female
+  citizenship: canadian
+  gpa: 3.7
+  financial_need: false
+  first_gen: false
+  visible_minority: false
+  leadership: true
+  stem_volunteering: true
+  target_industry: software
+
+filters:
+  min_amount: 500
+  include_no_amount: true   # include scholarships where amount isn't listed
+
+notifications:
+  discord: true
+  github_pages: true
