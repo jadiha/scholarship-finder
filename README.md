@@ -1,165 +1,149 @@
 # Scholarship Finder
 
-A free, self-hosted scholarship scraper that runs daily and delivers personalized results to your Discord. No accounts, no servers, no cost. Mainly targeted for Female Identifying Waterloo Engineering Students.
+A free, self-hosted tool that finds scholarships for you and delivers them to Discord daily. No server, no account, no cost — runs entirely on GitHub Actions.
 
-Scrapes 9 sources, filters by your profile, scores by fit, and posts new scholarships directly to you.
-
-**Sources:** UWaterloo Awards DB, UWaterloo Engineering, ONWiE, Engineers Canada, Women in Eng & Tech, ScholarshipsCanada, StudentAwards, Bold.org, Corporate (Google, Shopify, RBC, TD, Scotiabank, Microsoft, Fortis, De Beers)
+Built specifically for **female-identifying engineering students at Canadian universities** but configurable for any profile.
 
 ---
 
-## How it works
+## What it does
 
-1. GitHub Actions runs daily at 8am EST — free, no server needed
-2. Scrapes all sources and filters by your `config.yaml` profile
-3. Scores each scholarship by how well it fits you (specificity, amount, deadline, effort)
-4. Posts **only new** scholarships to Discord — no spam
-5. Updates a full dashboard on GitHub Pages
-
----
-
-## Setup (10 minutes)
-
-### Step 1 — Fork this repo
-
-Click **Fork** at the top right of this page. This creates your own copy that runs independently.
+- Runs every morning at 8am EST
+- Pulls from a verified list of scholarships + Engineers Canada live listings
+- Filters by your profile (year, program, gender, citizenship, GPA, etc.)
+- Scores each scholarship by how well it fits you
+- Posts **only new** ones to your Discord — no repeat spam
+- Generates a full dashboard on GitHub Pages sorted by deadline
 
 ---
 
-### Step 2 — Edit your profile
+## Setup (10 minutes, no coding required)
 
-Open `config.yaml` in your forked repo and update it with your details:
+### 1. Fork this repo
 
-```yaml
-profile:
-  year: 3                          # your current year (1–4)
-  program: systems_design_engineering
-  school: university_of_waterloo
-  gender: female                   # female / male / any
-  citizenship: canadian            # canadian / permanent_resident / international
-  gpa: 3.7                         # used to filter GPA-gated scholarships
-  financial_need: false            # true = include need-based awards
-  first_gen: false                 # true = include first-gen awards
-  visible_minority: false          # true = include equity-focused awards
-  leadership: true
-  stem_volunteering: true
-  target_industry: software        # software / hardware / sustainability / finance / etc.
-
-filters:
-  min_amount: 500                  # ignore scholarships under this amount
-  include_no_amount: true          # include scholarships where amount isn't listed
-
-notifications:
-  discord: true
-  github_pages: true
-```
-
-To edit: click the file → pencil icon → make changes → click "Commit changes".
+Click **Fork** at the top right. Your copy runs independently on your own GitHub account for free.
 
 ---
 
-### Step 3 — Create a Discord webhook
+### 2. Create a Discord webhook
 
-1. Open Discord → go to any server you own (or create a new one)
-2. Create a channel called `#scholarships`
-3. Click the gear icon on the channel → **Integrations** → **Webhooks**
-4. Click **New Webhook** → give it a name (e.g. "Scholarship Bot") → click **Copy Webhook URL**
+1. Open Discord → create a server or use an existing one
+2. Create a channel (e.g. `#scholarships`)
+3. Click the gear icon → **Integrations** → **Webhooks** → **New Webhook**
+4. Name it anything → click **Copy Webhook URL**
 
-Keep this URL — you need it for the next step.
-
----
-
-### Step 4 — Add the webhook as a GitHub secret
-
-1. Go to your forked repo on GitHub
-2. Click **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret**
-4. Name: `DISCORD_WEBHOOK_URL`
-5. Value: paste your webhook URL
-6. Click **Add secret**
+**Keep this URL private — treat it like a password.**
 
 ---
 
-### Step 5 — Enable GitHub Pages
+### 3. Add GitHub secrets
 
-1. Go to **Settings** → **Pages** (left sidebar)
-2. Under **Source**, select **Deploy from a branch**
-3. Branch: `main` | Folder: `/docs`
-4. Click **Save**
+Go to your forked repo → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
 
-Your dashboard will be live at: `https://yourusername.github.io/scholarship-finder/`
+Add this secret:
+
+| Name | Value |
+|---|---|
+| `DISCORD_WEBHOOK_URL` | your webhook URL from step 2 |
+
+Optionally add these for more precise filtering (all default to safe values if not set):
+
+| Name | Example value | Default |
+|---|---|---|
+| `GPA` | `3.7` | `3.5` |
+| `FINANCIAL_NEED` | `true` or `false` | `false` |
+| `FIRST_GEN` | `true` or `false` | `false` |
+| `VISIBLE_MINORITY` | `true` or `false` | `false` |
 
 ---
 
-### Step 6 — Run it for the first time
+### 4. Customize your profile
 
-1. Go to the **Actions** tab in your repo
-2. Click **Daily Scholarship Scrape** on the left
+The non-sensitive parts of your profile (year, program, school, gender) are in `.github/workflows/scrape.yml`. Edit them directly in GitHub:
+
+1. Open `.github/workflows/scrape.yml`
+2. Click the pencil icon
+3. Find the **Write config** step and update the values
+4. Commit changes
+
+---
+
+### 5. Enable GitHub Pages (optional dashboard)
+
+1. **Settings** → **Pages**
+2. Source: **Deploy from a branch** → `main` → `/docs`
+3. Save
+
+Your dashboard will be at `https://yourusername.github.io/scholarship-finder/`
+
+---
+
+### 6. Run it
+
+1. Go to the **Actions** tab
+2. Click **Daily Scholarship Scrape**
 3. Click **Run workflow** → **Run workflow**
 
-Wait about 2 minutes. You should see new scholarships posted in your Discord channel and your dashboard updated.
+Takes about 2 minutes. Check your Discord channel when it's done.
 
-After this it runs every day at 8am EST automatically.
+After the first run, it runs automatically every day at 8am EST.
 
 ---
 
-## Run locally (optional)
+## Run locally
 
 ```bash
-git clone https://github.com/yourusername/-scholarship-finder.git
-cd -scholarship-finder
+git clone https://github.com/yourusername/scholarship-finder.git
+cd scholarship-finder
 pip install -r requirements.txt
+playwright install --with-deps chromium
 cp .env.example .env
-# open .env and paste your Discord webhook URL
+# paste your Discord webhook URL in .env
 python main.py
 ```
 
 ---
 
-## Adding more scrapers
+## How scholarships are scored
 
-Each scraper is a single file in `scrapers/`. To add a new source:
-
-1. Create `scrapers/mysource.py`:
-
-```python
-from .base import BaseScraper, Scholarship
-
-class MySourceScraper(BaseScraper):
-    def scrape(self) -> list[Scholarship]:
-        # fetch + parse the page
-        # return list of Scholarship objects
-        return []
-```
-
-2. Add it to `main.py`:
-
-```python
-from scrapers.mysource import MySourceScraper
-# ...
-scrapers = [
-    ...,
-    MySourceScraper(config),
-]
-```
-
----
-
-## Scholarship scoring
-
-Each scholarship is scored 0–100 based on:
+Each scholarship is scored 0–100:
 
 | Factor | Weight | Logic |
 |---|---|---|
-| Specificity | 35% | Scholarships targeted to your exact profile = less competition |
+| Specificity | 35% | More targeted to your profile = less competition |
 | Amount | 25% | Higher dollar value ranks higher |
 | Deadline urgency | 20% | Closing soon gets boosted |
-| Effort required | 20% | Easy applications rank higher |
-
-Discord posts are sorted by score — highest match first.
+| Effort | 20% | Easier applications rank higher |
 
 ---
 
-## Support
+## Adding a scholarship
 
-If something isn't working, open an issue on this repo.
+Found one we're missing? Add it to `scrapers/curated.py`:
+
+```python
+{
+    "name": "Scholarship Name",
+    "url": "https://direct-application-link.com",
+    "amount_text": "$5,000",
+    "amount_min": 5000,
+    "deadline_text": "April 30, 2026",
+    "deadline_iso": "2026-04-30",
+    "tags": ["female", "engineering", "canadian"],
+    "effort": "medium",
+    "notes": "Any requirements or tips.",
+},
+```
+
+Or open an issue and describe it — it'll get added.
+
+---
+
+## Current scholarship sources
+
+- Manually curated verified list (18 scholarships)
+- Engineers Canada live listings (scraped daily)
+
+---
+
+Built by [@jadiha](https://github.com/jadiha)
