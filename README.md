@@ -1,6 +1,6 @@
 # Scholarship Finder
 
-A free, self-hosted scholarship scraper that runs daily and delivers personalized results to your Discord. No accounts, no servers, no cost.
+A free, self-hosted scholarship scraper that runs daily and delivers personalized results to your Discord. No accounts, no servers, no cost. Mainly targeted for Female Identifying Waterloo Engineering Students.
 
 Scrapes 9 sources, filters by your profile, scores by fit, and posts new scholarships directly to you.
 
