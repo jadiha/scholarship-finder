@@ -1,50 +1,52 @@
 from bs4 import BeautifulSoup
 from .base import BaseScraper, Scholarship
+import re
 
 
 class UWaterlooScraper(BaseScraper):
-    """
-    Scrapes the UWaterloo undergraduate awards database filtered by
-    Engineering faculty and Women affiliation.
-    """
-    BASE_URL = (
+    URL = (
         "https://uwaterloo.ca/student-awards-financial-aid/awards/database"
-        "?field_award_level=undergraduate"
-        "&field_award_faculty=engineering"
-        "&field_award_affiliation=women"
+        "?field_award_level=undergraduate&field_award_faculty=engineering"
     )
 
-    def scrape(self) -> list[Scholarship]:
+    def scrape(self, page) -> list[Scholarship]:
         scholarships = []
         try:
-            resp = self.get(self.BASE_URL)
-            soup = BeautifulSoup(resp.text, "lxml")
+            page.goto(self.URL, wait_until="networkidle", timeout=30000)
+            page.wait_for_selector(".views-row, article, .award", timeout=10000)
+            html = page.content()
+            soup = BeautifulSoup(html, "lxml")
 
-            # UW awards database renders each award as a row/block
-            rows = soup.select(".views-row, .award-item, article.award")
-            if not rows:
-                # Fallback: try generic list items
-                rows = soup.select("li.views-row")
-
+            rows = soup.select(".views-row, article.node, .award-item")
             for row in rows:
-                name_el = row.select_one("h3, h2, .field-content a, .views-field-title a")
-                if not name_el:
+                title_el = row.select_one("h2, h3, .field-content a, a")
+                if not title_el:
                     continue
 
-                name = name_el.get_text(strip=True)
+                name = title_el.get_text(strip=True)
+                if not name or len(name) < 5:
+                    continue
+
                 link_el = row.select_one("a[href]")
-                url = link_el["href"] if link_el else self.BASE_URL
+                url = link_el["href"] if link_el else self.URL
                 if url.startswith("/"):
                     url = "https://uwaterloo.ca" + url
 
-                amount_el = row.select_one(".field-award-value, .views-field-field-award-value")
-                amount_text = amount_el.get_text(strip=True) if amount_el else "See details"
+                text = row.get_text(" ", strip=True)
+                amount_match = re.search(r"\$[\d,]+", text)
+                amount_text = amount_match.group(0) if amount_match else "See details"
 
-                deadline_el = row.select_one(".field-award-deadline, .views-field-field-award-deadline")
-                deadline_text = deadline_el.get_text(strip=True) if deadline_el else "Check portal"
+                deadline_match = re.search(
+                    r"(January|February|March|April|May|June|July|August|"
+                    r"September|October|November|December)\s+\d{1,2},?\s*\d{4}",
+                    text, re.IGNORECASE
+                )
+                deadline_text = deadline_match.group(0) if deadline_match else "Check portal"
 
-                desc_el = row.select_one(".field-body, .views-field-body")
-                description = desc_el.get_text(strip=True)[:300] if desc_el else ""
+                tags = ["engineering", "uwaterloo", "undergraduate"]
+                text_lower = text.lower()
+                if any(w in text_lower for w in ["female", "woman", "women"]):
+                    tags.append("female")
 
                 scholarships.append(Scholarship(
                     name=name,
@@ -52,8 +54,8 @@ class UWaterlooScraper(BaseScraper):
                     source="UWaterloo",
                     amount_text=amount_text,
                     deadline_text=deadline_text,
-                    description=description,
-                    eligibility_tags=["female", "engineering", "uwaterloo", "undergraduate"],
+                    description=text[:250],
+                    eligibility_tags=tags,
                     effort="low",
                 ))
 

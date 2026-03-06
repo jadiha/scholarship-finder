@@ -2,6 +2,7 @@ import json
 import os
 import yaml
 from dotenv import load_dotenv
+from playwright.sync_api import sync_playwright
 
 from scrapers.uwaterloo import UWaterlooScraper
 from scrapers.uwaterloo_engineering import UWaterlooEngineeringScraper
@@ -41,7 +42,6 @@ def main():
     config = load_config()
     seen = load_seen()
 
-    print("Running scrapers...")
     scrapers = [
         UWaterlooScraper(config),
         UWaterlooEngineeringScraper(config),
@@ -55,10 +55,28 @@ def main():
     ]
 
     all_raw = []
-    for scraper in scrapers:
-        results = scraper.scrape()
-        print(f"  [{scraper.__class__.__name__}] found {len(results)}")
-        all_raw.extend(results)
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(
+            user_agent=(
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0.0.0 Safari/537.36"
+            )
+        )
+
+        for scraper in scrapers:
+            name = scraper.__class__.__name__
+            # CorporateScraper doesn't need a browser page
+            if isinstance(scraper, CorporateScraper):
+                results = scraper.scrape(page=None)
+            else:
+                results = scraper.scrape(page)
+            print(f"  [{name}] found {len(results)}")
+            all_raw.extend(results)
+
+        browser.close()
 
     print(f"Total raw: {len(all_raw)}")
 

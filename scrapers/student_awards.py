@@ -4,27 +4,24 @@ import re
 
 
 class StudentAwardsScraper(BaseScraper):
-    """
-    Scrapes studentawards.com for women + engineering scholarships in Canada.
-    """
     URLS = [
         "https://studentawards.com/scholarships/engineering/",
         "https://studentawards.com/scholarships/women/",
     ]
 
-    def scrape(self) -> list[Scholarship]:
+    def scrape(self, page) -> list[Scholarship]:
         scholarships = []
         seen_names = set()
 
         for url in self.URLS:
             try:
-                resp = self.get(url)
-                soup = BeautifulSoup(resp.text, "lxml")
+                page.goto(url, wait_until="networkidle", timeout=30000)
+                page.wait_for_timeout(2000)
 
-                cards = soup.select("article, .scholarship-card, .award-item, .listing")
-                if not cards:
-                    cards = soup.select("div[class*='award'], div[class*='scholarship']")
+                html = page.content()
+                soup = BeautifulSoup(html, "lxml")
 
+                cards = soup.select("article, .scholarship-card, .award-item, .listing, .entry")
                 for card in cards:
                     title_el = card.select_one("h2, h3, h4, .entry-title, .card-title")
                     link_el = card.select_one("a[href]")
@@ -32,7 +29,7 @@ class StudentAwardsScraper(BaseScraper):
                         continue
 
                     name = title_el.get_text(strip=True)
-                    if name in seen_names:
+                    if not name or name in seen_names:
                         continue
                     seen_names.add(name)
 
@@ -40,18 +37,19 @@ class StudentAwardsScraper(BaseScraper):
                     if href.startswith("/"):
                         href = "https://studentawards.com" + href
 
-                    text = card.get_text(strip=True)
+                    text = card.get_text(" ", strip=True)
                     amount_match = re.search(r"\$[\d,]+", text)
                     amount_text = amount_match.group(0) if amount_match else "See details"
 
                     deadline_match = re.search(
-                        r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s*\d{4}",
+                        r"(January|February|March|April|May|June|July|August|"
+                        r"September|October|November|December)\s+\d{1,2},?\s*\d{4}",
                         text, re.IGNORECASE
                     )
                     deadline_text = deadline_match.group(0) if deadline_match else "Check site"
 
                     tags = ["engineering", "canadian"]
-                    if "women" in url or "female" in text.lower() or "woman" in text.lower():
+                    if "women" in url or any(w in text.lower() for w in ["female", "woman", "women"]):
                         tags.append("female")
 
                     scholarships.append(Scholarship(

@@ -4,37 +4,34 @@ import re
 
 
 class WomenInEngTechScraper(BaseScraper):
-    """
-    Scrapes Women in Engineering and Technology scholarship listings.
-    https://womeninengtech.ca/timeline-category/stem-scholarships-and-bursaries/
-    """
     URL = "https://womeninengtech.ca/timeline-category/stem-scholarships-and-bursaries/"
 
-    def scrape(self) -> list[Scholarship]:
+    def scrape(self, page) -> list[Scholarship]:
         scholarships = []
         try:
-            resp = self.get(self.URL)
-            soup = BeautifulSoup(resp.text, "lxml")
+            page.goto(self.URL, wait_until="networkidle", timeout=30000)
+            page.wait_for_timeout(2000)
 
-            entries = soup.select("article, .entry, .timeline-item, .post")
-            if not entries:
-                entries = soup.select(".jet-listing-grid__item")
+            html = page.content()
+            soup = BeautifulSoup(html, "lxml")
 
+            entries = soup.select("article, .jet-listing-grid__item, .elementor-post")
             for entry in entries:
-                title_el = entry.select_one("h1, h2, h3, h4, .entry-title")
+                title_el = entry.select_one("h1, h2, h3, h4, .entry-title, .jet-listing-dynamic-field")
                 link_el = entry.select_one("a[href]")
                 if not title_el or not link_el:
                     continue
 
                 name = title_el.get_text(strip=True)
                 url = link_el["href"]
-                text = entry.get_text(strip=True)
+                text = entry.get_text(" ", strip=True)
 
                 amount_match = re.search(r"\$[\d,]+", text)
                 amount_text = amount_match.group(0) if amount_match else "See details"
 
                 deadline_match = re.search(
-                    r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s*\d{4}",
+                    r"(January|February|March|April|May|June|July|August|"
+                    r"September|October|November|December)\s+\d{1,2},?\s*\d{4}",
                     text, re.IGNORECASE
                 )
                 deadline_text = deadline_match.group(0) if deadline_match else "Check site"

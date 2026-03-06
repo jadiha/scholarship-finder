@@ -4,41 +4,46 @@ import re
 
 
 class ONWiEScraper(BaseScraper):
-    """
-    Scrapes the Ontario Network of Women in Engineering scholarship listings.
-    https://www.onwie.ca/resource-tools/scholarships-and-opportunities/
-    """
     URL = "https://www.onwie.ca/resource-tools/scholarships-and-opportunities/"
 
-    def scrape(self) -> list[Scholarship]:
+    def scrape(self, page) -> list[Scholarship]:
         scholarships = []
         try:
-            resp = self.get(self.URL)
-            soup = BeautifulSoup(resp.text, "lxml")
+            page.goto(self.URL, wait_until="networkidle", timeout=30000)
+            page.wait_for_timeout(2000)
 
-            entries = soup.select(".entry-content li, .scholarship-item, article, .wp-block-group")
-            if not entries:
-                entries = soup.select("li")
+            html = page.content()
+            soup = BeautifulSoup(html, "lxml")
 
-            for entry in entries:
-                text = entry.get_text(strip=True)
-                if len(text) < 20:
+            # ONWiE is a WordPress site — entries are in the content area
+            content = soup.select_one(".entry-content, .page-content, main")
+            if not content:
+                content = soup
+
+            links = content.select("a[href]")
+            seen = set()
+            for link in links:
+                name = link.get_text(strip=True)
+                url = link["href"]
+
+                if not name or len(name) < 10 or url in seen:
+                    continue
+                if not url.startswith("http"):
+                    continue
+                # Skip nav/footer links
+                if any(skip in url for skip in ["onwie.ca/about", "onwie.ca/programs", "onwie.ca/contact"]):
                     continue
 
-                link_el = entry.select_one("a[href]")
-                if not link_el:
-                    continue
+                seen.add(url)
+                parent_text = link.parent.get_text(" ", strip=True) if link.parent else ""
+                text = parent_text[:300]
 
-                name = link_el.get_text(strip=True)
-                url = link_el["href"]
-
-                # Try to extract amount from text
                 amount_match = re.search(r"\$[\d,]+", text)
                 amount_text = amount_match.group(0) if amount_match else "See details"
 
-                # Try to extract deadline
                 deadline_match = re.search(
-                    r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s*\d{4}",
+                    r"(January|February|March|April|May|June|July|August|"
+                    r"September|October|November|December)\s+\d{1,2},?\s*\d{4}",
                     text, re.IGNORECASE
                 )
                 deadline_text = deadline_match.group(0) if deadline_match else "Check site"
@@ -49,7 +54,7 @@ class ONWiEScraper(BaseScraper):
                     source="ONWiE",
                     amount_text=amount_text,
                     deadline_text=deadline_text,
-                    description=text[:250],
+                    description=text,
                     eligibility_tags=["female", "engineering", "ontario", "canadian"],
                     effort="medium",
                 ))

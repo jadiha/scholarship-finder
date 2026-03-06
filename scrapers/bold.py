@@ -4,23 +4,21 @@ import re
 
 
 class BoldScraper(BaseScraper):
-    """
-    Scrapes Bold.org for women in STEM scholarships open to Canadians.
-    https://bold.org/scholarships/by-demographics/women/women-stem-scholarships/
-    """
     URL = "https://bold.org/scholarships/by-demographics/women/women-stem-scholarships/"
 
-    def scrape(self) -> list[Scholarship]:
+    def scrape(self, page) -> list[Scholarship]:
         scholarships = []
         try:
-            resp = self.get(self.URL)
-            soup = BeautifulSoup(resp.text, "lxml")
+            page.goto(self.URL, wait_until="networkidle", timeout=30000)
+            # Scroll to load more results
+            for _ in range(3):
+                page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                page.wait_for_timeout(1500)
 
-            cards = soup.select(
-                ".scholarship-card, .ScholarshipCard, article, "
-                "[class*='ScholarshipCard'], [class*='scholarship-card']"
-            )
+            html = page.content()
+            soup = BeautifulSoup(html, "lxml")
 
+            cards = soup.select("[class*='ScholarshipCard'], [class*='scholarship-card'], article")
             for card in cards:
                 title_el = card.select_one("h2, h3, h4, [class*='title'], [class*='name']")
                 link_el = card.select_one("a[href]")
@@ -32,18 +30,17 @@ class BoldScraper(BaseScraper):
                 if url.startswith("/"):
                     url = "https://bold.org" + url
 
-                text = card.get_text(strip=True)
-
+                text = card.get_text(" ", strip=True)
                 amount_match = re.search(r"\$[\d,]+", text)
                 amount_text = amount_match.group(0) if amount_match else "See details"
 
                 deadline_match = re.search(
-                    r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s*\d{4}",
+                    r"(January|February|March|April|May|June|July|August|"
+                    r"September|October|November|December)\s+\d{1,2},?\s*\d{4}",
                     text, re.IGNORECASE
                 )
                 deadline_text = deadline_match.group(0) if deadline_match else "Check site"
 
-                # Bold has many US-only scholarships — flag for filter
                 is_canada_ok = any(w in text.lower() for w in ["canada", "international", "worldwide", "any country"])
                 tags = ["female", "stem"]
                 if is_canada_ok:

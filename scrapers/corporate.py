@@ -89,7 +89,7 @@ class CorporateScraper(BaseScraper):
     Live deadline info is checked via a lightweight page fetch where possible.
     """
 
-    def scrape(self) -> list[Scholarship]:
+    def scrape(self, page=None) -> list[Scholarship]:
         scholarships = []
 
         for entry in CORPORATE_SOURCES:
@@ -110,7 +110,7 @@ class CorporateScraper(BaseScraper):
 
         return scholarships
 
-    def _try_fetch_deadline(self, url: str) -> tuple[str, str | None]:
+    def _try_fetch_deadline(self, url: str) -> tuple:
         """Best-effort: fetch the page and look for a deadline date."""
         try:
             resp = self.get(url)

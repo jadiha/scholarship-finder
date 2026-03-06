@@ -4,29 +4,25 @@ import re
 
 
 class EngineersCanadaScraper(BaseScraper):
-    """
-    Scrapes Engineers Canada scholarship listings.
-    https://engineerscanada.ca/awards-and-honours/scholarships
-    """
     URL = "https://engineerscanada.ca/awards-and-honours/scholarships"
 
-    def scrape(self) -> list[Scholarship]:
+    def scrape(self, page) -> list[Scholarship]:
         scholarships = []
         try:
-            resp = self.get(self.URL)
-            soup = BeautifulSoup(resp.text, "lxml")
+            page.goto(self.URL, wait_until="networkidle", timeout=30000)
+            page.wait_for_timeout(2000)
 
-            # Engineers Canada renders awards as cards or list items
-            cards = soup.select(".award-card, .scholarship-item, .views-row, article")
-            if not cards:
-                cards = soup.select("li")
+            html = page.content()
+            soup = BeautifulSoup(html, "lxml")
 
+            cards = soup.select(".award-card, .scholarship-card, article, .views-row, li")
             for card in cards:
                 link_el = card.select_one("a[href]")
+                title_el = card.select_one("h2, h3, h4, strong")
                 if not link_el:
                     continue
 
-                name = link_el.get_text(strip=True)
+                name = (title_el or link_el).get_text(strip=True)
                 if not name or len(name) < 5:
                     continue
 
@@ -34,13 +30,13 @@ class EngineersCanadaScraper(BaseScraper):
                 if url.startswith("/"):
                     url = "https://engineerscanada.ca" + url
 
-                text = card.get_text(strip=True)
-
+                text = card.get_text(" ", strip=True)
                 amount_match = re.search(r"\$[\d,]+", text)
                 amount_text = amount_match.group(0) if amount_match else "See details"
 
                 deadline_match = re.search(
-                    r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s*\d{4}",
+                    r"(January|February|March|April|May|June|July|August|"
+                    r"September|October|November|December)\s+\d{1,2},?\s*\d{4}",
                     text, re.IGNORECASE
                 )
                 deadline_text = deadline_match.group(0) if deadline_match else "Check site"
